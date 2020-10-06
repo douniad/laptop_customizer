@@ -3,7 +3,6 @@ import Form from './Form/Form';
 import Customs from './Customs/Customs';
 import CartSummary from './CartSummary/CartSummary';
 import './App.css';
-import slugify from 'slugify';
 
 
 const FEATURES = {

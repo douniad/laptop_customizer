@@ -1,32 +1,18 @@
 import React from 'react';
-import slugify from 'slugify';
+
 import Features from '../Features/Features';
 
-export default class CartSummary extends React.Component {
+export default class Customs extends React.Component {
   render() {
       const features = Object.keys(this.props.features).map((feature, idx) => {
-          const featureHash = feature + '-' + idx;
-          const options = this.props.features[feature].map(item => {
-            const itemHash = slugify(JSON.stringify(item));
-            return (
-              <Features
-                  itemHash={itemHash}
-                  feature={feature}
-                  selected={this.props.selected}
-                  item={item}
-                  updateFeature={(e) => this.props.updateFeature(feature, item)}
-              />
-            );
-          });
-
-          return (
-            <fieldset className="feature" key={featureHash}>
-              <legend className="feature__name">
-                <h3>{feature}</h3>
-              </legend>
-              {options}
-            </fieldset>
-          );
+        const featureHash = feature + '-' + idx;
+        const options= this.props.features[feature]
+          return <Features
+          options = {options}
+          name={feature}
+          selected={this.props.selected}
+          updateFeature={this.props.updateFeature}
+          hash={featureHash}/>
         });
       return (
           <form className="main__form">

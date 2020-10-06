@@ -1,28 +1,34 @@
 import React from 'react';
 import slugify from 'slugify';
-import Currency from '../Currency/Currency';
+import Options from '../Options/Options'
 
-class Features extends React.Component {
-  render() {
-    return (
-      <div key={this.props.itemHash} className="feature__item">
-        <input
-            type="radio"
-            id={this.props.itemHash}
-            className="feature__option"
-            name={slugify(this.props.feature)}
-            checked={this.props.item.name === this.props.selected[this.props.feature].name}
-            onChange={this.props.updateFeature}
+export default class Features extends React.Component {
+
+    render() {
+    const options = this.props.options.map(option => {
+      const itemHash = slugify(JSON.stringify(option));
+      return (
+        <Options
+            itemHash={itemHash}
+            feature={this.props.name}
+            selected={this.props.selected}
+            item={option}
+            updateFeature={(e) => this.props.updateFeature(this.props.name, option)}
         />
 
-        <label htmlFor={this.props.itemHash} className="feature__label">
-          {this.props.item.name}
-          (<Currency cost={this.props.item.cost}/>)
-        </label>
+      );
+    });
 
-      </div>
-    )
-  }
+    
+    return (
+      <fieldset className="feature" key={this.props.hash}>
+        <legend className="feature__name">
+          <h3>{this.props.name}</h3>
+        </legend>
+        {options}
+      </fieldset>
+    );
+}
 }
 
-export default Features;
+
